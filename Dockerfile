@@ -1,14 +1,21 @@
-FROM centos:latest
+FROM alpine:latest
 
 MAINTAINER Justin Henderson justin@hasecuritysolutions.com
 
-RUN yum install -y python git python-six \
+RUN apk add --update --no-cache --virtual .build-deps \
+    && apk add --no-cache --virtual .build-deps \
+    && apk add --no-cache git py2-pip \
+    && apk add --update --no-cache python2 \
+    && pip install PySocks \
+    && pip install six \
+    && rm -rf /var/cache/apk/* \
     && cd /opt && git clone https://github.com/MarkBaggett/freq.git \
     && mv /opt/freq/freqtable2018.freq /opt/freq/freq_table.freq \
     && mkdir /var/log/freq \
     && ln -sf /dev/stderr /var/log/freq/freq.log \
-    && useradd -ms /bin/bash freq \
+    && adduser -Ds /bin/sh freq \
     && chown -R freq: /opt/freq
+
 USER freq
 
 EXPOSE 10004
