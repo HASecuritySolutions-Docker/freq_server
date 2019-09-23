@@ -15,6 +15,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
     && ln -sf /dev/stderr /var/log/freq/freq.log \
     && adduser -Ds /bin/sh freq \
     && chown -R freq: /opt/freq
+COPY *.freq /opt/freq
 
 USER freq
 
