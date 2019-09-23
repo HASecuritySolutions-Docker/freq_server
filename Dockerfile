@@ -23,4 +23,4 @@ EXPOSE 10004
 
 STOPSIGNAL SIGTERM
 
-CMD /usr/bin/python /opt/freq/freq_server.py -ip 0.0.0.0 10004 /opt/freq/freq_table.freq
+CMD /usr/bin/python /opt/freq/freq_server.py -ip 0.0.0.0 10004 /opt/freq/alexa.freq
