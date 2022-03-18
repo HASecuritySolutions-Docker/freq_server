@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.15
 
 MAINTAINER Justin Henderson justin@hasecuritysolutions.com
 
