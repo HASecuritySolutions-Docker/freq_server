@@ -1,19 +1,16 @@
-FROM alpine:latest
+FROM python:3.11.2-slim
 
 MAINTAINER Justin Henderson justin@hasecuritysolutions.com
 
-RUN apk add --update --no-cache --virtual .build-deps \
-    && apk add --no-cache --virtual .build-deps \
-    && apk add --no-cache git py2-pip \
-    && apk add --update --no-cache python2 \
-    && pip install PySocks \
+RUN pip install PySocks \
     && pip install six \
-    && rm -rf /var/cache/apk/* \
+    && apt update \
+    && apt install -y git \
     && cd /opt && git clone https://github.com/markbaggett/freq \
     && mv /opt/freq/freqtable2018.freq /opt/freq/freq_table.freq \
     && mkdir /var/log/freq \
     && ln -sf /dev/stderr /var/log/freq/freq.log \
-    && adduser -Ds /bin/sh freq \
+    && useradd freq \
     && chown -R freq: /opt/freq
 COPY *.freq /opt/freq
 
