@@ -10,9 +10,11 @@ RUN pip install PySocks \
     && mv /opt/freq/freqtable2018.freq /opt/freq/freq_table.freq \
     && mkdir /var/log/freq \
     && ln -sf /dev/stderr /var/log/freq/freq.log \
-    && useradd freq \
-    && chown -R freq: /opt/freq
+    && useradd freq
+    
 COPY *.freq /opt/freq
+
+RUN chown freq:freq -R /opt/freq
 
 USER freq
 
