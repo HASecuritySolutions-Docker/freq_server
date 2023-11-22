@@ -1,4 +1,4 @@
-FROM python:3.11.2-slim
+FROM python:slim-bookworm
 
 MAINTAINER Justin Henderson justin@hasecuritysolutions.com
 
